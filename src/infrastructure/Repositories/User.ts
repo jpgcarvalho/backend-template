@@ -1,15 +1,17 @@
-import { User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { IUserRepository } from "../../business/Interfaces/Repository/IUser";
 import { databaseClient } from "../prismaClient";
 
 export class UserRepository implements IUserRepository {
 
   database: typeof databaseClient.user;
+
   constructor() {
     this.database = databaseClient.user
   }
 
-  async create(user: User): Promise<User | null> {
+  async create(user: Prisma.UserCreateInput): Promise<User | null> {
+
 
     const userAlreadyExists = await this.getOneByEmail(user.email);
 
@@ -52,12 +54,26 @@ export class UserRepository implements IUserRepository {
     return response;
   }
 
-  async update(): Promise<User> {
-    throw new Error("Method not implemented.");
+  async update(userId: number, user: Prisma.UserUpdateInput): Promise<boolean> {
+
+    const response = await this.database.update({
+      where: { id: userId },
+      data: {
+        ...user
+      }
+    });
+
+    return !!response;
   }
 
   async delete(userId: number): Promise<boolean> {
-    throw new Error("Method not implemented.");
+    const response = await this.database.delete({
+      where: {
+        id: userId
+      },
+    })
+
+    return !!response;
   }
 
 }
