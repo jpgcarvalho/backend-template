@@ -61,11 +61,10 @@ export class UserController {
   public async getUserByEmail(req: Request<unknown, unknown, { email: string }, unknown>, res: Response) {
 
     const { email } = req.body;
-    console.log("----------------Email", email);
 
-    // const result = await this.userService.getUserByEmail(email);
+    const result = await this.userService.getUserByEmail(email);
 
-    return res.status(200).json({message: "hello"});
+    return res.status(200).json(result);
 
   }
 

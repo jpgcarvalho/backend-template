@@ -13,8 +13,8 @@ router.delete("/:id", userController.deleteUser.bind(userController));
 
 router.put("/:id", userController.updateUser.bind(userController));
 
-router.get("/:id", userController.getUserById.bind(userController));
+router.get("/email", userController.getUserByEmail.bind(userController));
 
-router.get("/get-by-email", userController.getUserByEmail.bind(userController));
+router.get("/:id", userController.getUserById.bind(userController));
 
 export default router;
