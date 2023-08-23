@@ -49,7 +49,11 @@ export class UserRepository implements IUserRepository {
   }
 
   async getAll(): Promise<User[]> {
-    const response = await this.database.findMany();
+    const response = await this.database.findMany({
+      include: {
+        posts: true
+      }
+    });
 
     return response;
   }

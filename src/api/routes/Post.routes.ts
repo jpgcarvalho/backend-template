@@ -1,7 +1,12 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
+import { PostController } from "../controllers/Post";
 
 const router: Router = Router();
 
-router.get("/", (req: Request, res: Response) => res.send("post route"));
+const postController = new PostController();
+
+router.get("/", postController.getAllPosts.bind(postController));
+router.post("/", postController.createPost.bind(postController));
+router.delete("/:id", postController.deletePost.bind(postController));
 
 export default router;
