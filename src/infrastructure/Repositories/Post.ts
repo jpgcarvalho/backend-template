@@ -1,6 +1,6 @@
 import { Post, Prisma } from "@prisma/client";
 import { IPostRepository } from "../../business/Interfaces/Repository/IPost";
-import { client as databaseClient } from "../prismaClient";
+import { databaseClient } from "../prismaClient";
 
 export class PostRepository implements IPostRepository {
 
